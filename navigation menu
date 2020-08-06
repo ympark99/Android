@@ -31,4 +31,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         layout_drawer.closeDrawers()
         return false
     }
+
+
+    override fun onBackPressed() {  // 백버튼 누를 시 수행
+        if(layout_drawer.isDrawerOpen(GravityCompat.START)){
+            layout_drawer.closeDrawers()
+        }
+        else{
+            super.onBackPressed()  //  일반 백버튼 기능 실행 (finish)
+        }
+
+    }
 }
