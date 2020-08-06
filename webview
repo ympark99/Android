@@ -1,0 +1,36 @@
+package com.example.webviewkt
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.View
+import android.webkit.WebChromeClient
+import android.webkit.WebViewClient
+import kotlinx.android.synthetic.main.activity_main.*
+
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        webView.settings.javaScriptEnabled = true // 자바 스크립트 허용
+        /* 웹뷰에서 새 창 뜨지 않도록 방지하는 구문 */
+        webView.webViewClient = WebViewClient()
+        webView.webChromeClient = WebChromeClient()
+
+        btn_web.setOnClickListener {view ->
+            webView.loadUrl("https://www.naver.com") // 링크 주소를 load
+            btn_web.visibility = View.INVISIBLE
+        }
+
+    }
+
+    override fun onBackPressed() {
+        if(webView.canGoBack()){
+            webView.goBack() // 웹사이트 뒤로가기
+        }
+        else{
+            super.onBackPressed() // 원래 백버트 기능
+        }
+    }
+}
